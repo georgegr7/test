@@ -1,0 +1,9 @@
+select C.display_name AS 'Contact display name', 
+C.organization_name AS 'Employer organisation name', 
+COUNT(A.Contact_id) AS 'Number (count) of cases'
+From drupaltest.civicrm_contact AS C
+JOIN drupaltest.civicrm_case_contact AS A ON C.id = A.Contact_id
+JOIN drupaltest.civicrm_case AS B ON B.id = A.id
+WHERE contact_type='Individual' and status_id='1'
+GROUP BY display_name, organization_name, Contact_id
+/* Where status_id=1 means ongoing status*/ 
